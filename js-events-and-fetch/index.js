@@ -21,21 +21,83 @@ const images = [
 const imageContainer = document.getElementById("image-container")
 
 images.forEach(img => {
+    renderImage(img)
+})
+
+function renderImage(img){
+    const div = document.createElement('div')
     const imgTag = document.createElement('img')
     imgTag.src = img.url
     const pTag = document.createElement('p')
     pTag.innerText = img.description
-    imageContainer.append(imgTag, pTag)
-})
+    const button = document.createElement('button')
+    button.innerText = "Delete, you horrible person"
+
+    button.addEventListener("click", deleteImage)
+
+    div.append(imgTag, pTag, button)
+    imageContainer.append(div)
+}
+
+function deleteImage(e){
+    e.target.parentElement.remove()
+}
 
 
 // Add a form to index.html with inputs for a new image url and a description
 // When a user submits, the new picture and description should be displayed on the page
 
+const form = document.getElementById("image-form")
+const imageInput = document.getElementById("img-input")
+const descriptionInput = document.getElementById("img-description")
 
+form.addEventListener("submit", (e) => { 
+    e.preventDefault()
+    const image = {
+        url: imageInput.value, 
+        description: descriptionInput.value
+    }
+    renderImage(image)
+})
+
+const users = [
+    {id: 1, email: "hanaa@mail.com", password: "bowie", name: "hanaa"}, 
+    {id: 2, email: "bill@mail.com", password: "bowie", name: "bill"}, 
+    {id: 3, email: "luke@mail.com", password: "bowie", name: "luke"}, 
+]
 
 // Add a button to each image to delete the image object from the page
 
 
 // Make a fetch request to the following url to post a random meme on the page:
-// https://api.imgflip.com/get_memes
+// https://api.imgflip.com/get_meme
+
+const logInButton = document.getElementById('log-in')
+const puppyContainer = document.getElementById('puppy-image-page')
+
+logInButton.addEventListener("click", () => {
+    const form = document.createElement('form')
+    const emailInput = document.createElement('input')
+    const passwordInput = document.createElement('input')
+    const submitBtn = document.createElement('input')
+    submitBtn.type = "submit"
+    form.append(emailInput, passwordInput, submitBtn)
+    form.addEventListener("submit", logIn)
+
+    puppyContainer.innerHTML = ""
+    puppyContainer.append(form)
+
+})
+
+function logIn(e){
+    e.preventDefault()
+    const email = e.target.children[0].value
+    const password = e.target.children[1].value
+
+    const user = users.find(obj => obj.email === email && obj.password === password)
+    if(user){
+        console.log(`Welcome ${user.name}`)
+    } else {
+        alert("nice try")
+    }
+}

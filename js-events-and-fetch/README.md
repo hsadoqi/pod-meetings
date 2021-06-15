@@ -26,6 +26,6 @@
 
 ### 13. What is the return value of a fetch request? What request does it make by default?
 
-### 14, What is JSON? What does the json method do?
+### 14. What is JSON? What does the json method do?
 
 
