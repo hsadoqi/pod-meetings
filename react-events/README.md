@@ -1,4 +1,4 @@
-# React Events 
+# Intro to React
 
 ### 1. What is JSX? What is the benefit of JSX?
 
